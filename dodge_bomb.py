@@ -11,18 +11,7 @@ delta = {
     pg.K_LEFT:(-5, 0),
     pg.K_RIGHT:(+5, 0)
 }
-"""
-zisyo = {
-    (0, -5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-    (+5, -5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-    (+5, 0):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-    (+5, +5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-    (0, +5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-    (-5, +5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-    (-5, 0):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-    (-5, -5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
-}
-"""
+
 def check_bound(rct:pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内or画面買いを判定し、真理値タプルに返す関数
@@ -70,7 +59,7 @@ def main():
         if kk_rct.colliderect(bb_rct):
             kk_img = kk_img2
             print("Game Over")
-            
+        
         
         key_lst = pg.key.get_pressed()
         sum_mv = [0,0]
