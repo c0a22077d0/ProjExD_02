@@ -6,12 +6,23 @@ import pygame as pg
 WIDTH, HEIGHT = 1000, 600
 
 delta = {
-    pg.K_UP: (0, -5),
-    pg.K_DOWN: (0, +5),
-    pg.K_LEFT: (-5, 0),
-    pg.K_RIGHT: (+5, 0)
+    pg.K_UP:(0, -5),
+    pg.K_DOWN:(0, +5),
+    pg.K_LEFT:(-5, 0),
+    pg.K_RIGHT:(+5, 0)
 }
-
+"""
+zisyo = {
+    (0, -5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    (+5, -5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    (+5, 0):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    (+5, +5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    (0, +5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    (-5, +5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    (-5, 0):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    (-5, -5):kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+}
+"""
 def check_bound(rct:pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内or画面買いを判定し、真理値タプルに返す関数
@@ -31,12 +42,17 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
-    kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+    kk_img = pg.transform.rotozoom(kk_img, 0,  2.0)
+    kk_img2 = pg.image.load("ex02/fig/8.png")
+    kk_img2 = pg.transform.rotozoom(kk_img2, 0,  2.0)
     kk_rct = kk_img.get_rect()
+    #kk_rct2 = kk_img2.get_rect()
     kk_rct.center = 900, 400
 
     bb_img = pg.Surface((20, 20))  #練習1　透明色
+    bb_img.set_colorkey(0, 0)
     pg.draw.circle(bb_img, (255, 0, 0), (10, 10), 10) #練習　半径10の赤い円
+
 
     bb_rct = bb_img.get_rect()
     bb_rct.centerx = random.randint(0, WIDTH) #練習2
@@ -50,9 +66,11 @@ def main():
             if event.type == pg.QUIT:
                 return
 
+        
         if kk_rct.colliderect(bb_rct):
+            kk_img = kk_img2
             print("Game Over")
-            return
+            
         
         key_lst = pg.key.get_pressed()
         sum_mv = [0,0]
@@ -76,7 +94,7 @@ def main():
         screen.blit(bb_img, bb_rct)
         pg.display.update()
         tmr += 1
-        clock.tick(10)
+        clock.tick(50)
 
 
 if __name__ == "__main__":
